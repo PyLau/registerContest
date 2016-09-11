@@ -8,9 +8,10 @@ angular
 	})
 
 	.controller("RegisterCtrl", function ($scope, $http) {
-		$scope.registerf = function(){
+		$scope.validate = function(){
 			$http.post('/valid', $scope.user).then(function(response){
-				if (response.data.valid){
+				if (!response.data.valid){
+					showRegister = true;
 					console.log(response.data.valid);
 				}
 			});
