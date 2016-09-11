@@ -14,28 +14,17 @@
 			<div id="signup">
 				<div class="signup-screen">
 					<div class="space-bot text-center">
-						<h1>Registro</h1>
+						<h1>Login</h1>
 						<div class="divider"></div>
 					</div>
-					<form ng-controller="RegisterCtrl" class="form-register" method="post" name="register" novalidate>
+					<form ng-controller="RegisterCtrl" ng-init="showRegister = false" class="form-register" method="post" name="register" novalidate>
 						<div class="input-field col s6">
-							<input ng-model="user.first_name" id="first-name" type="text" class="validate" required>
-							<label for="first-name">Nombre</label>
+							<input ng-model="user.ci" id="ci" type="number" name="ci" ng-minlength='6' class="validate" required>
+							<label for="ci">Cédula</label>
 						</div>
-						<div class="input-field col s6">
-							<input ng-model="user.last_name" id="last-name" type="text" class="validate" required>
-							<label for="last-name">Apellido</label>
-						</div>
-						<div class="input-field col s6">
-							<input ng-model="user.email" id="email" type="email" name="email" class="validate" required>
-							<label for="email">Correo electrónico</label>
-						</div>
-						<p class="alert alert-danger" ng-show="form-register.email.$error.email">Tu correo es inválido.</p>
-						<div class="input-field col s6">
-							<input ng-model="user.password" id="password" type="password" name="password" ng-minlength='6' class="validate" required>
-							<label for="password">Clave</label>
-						</div>
-						<p class="alert alert-danger" ng-show="form-register.password.$error.minlength || form.password.$invalid">Tu clave debe tener al menos 6 caracteres.</p>
+						
+						<p class="alert alert-danger" ng-show="form-register.ci.$error.minlength || form.ci.$invalid">Tu cédula debe tener al menos 6 caracteres.</p>
+
 						<div class="space-top text-center">
 							<button ng-click="registerf()" ng-disabled="form-register.$invalid" class="waves-effect waves-light btn done">
 								<i class="material-icons left">done</i> Listo
@@ -44,9 +33,6 @@
 								<i class="material-icons left">clear</i>Cancelar
 							</button>
 						</div>
-						<div class="footer">
-							<span>Login</span>
-						</div>
 					</form>
 				</div>
 			</div>
@@ -54,6 +40,7 @@
 		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-mocks.js"></script>
 		<script src="js/script.js"></script>
 	</body>
 </html>
