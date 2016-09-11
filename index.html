@@ -19,20 +19,20 @@
 					</div>
 					<form ng-controller="RegisterCtrl" class="form-register" method="post" name="register" novalidate>
 						<div class="input-field col s6">
-							<input id="first-name" type="text" class="validate" required>
+							<input ng-model="user.first_name" id="first-name" type="text" class="validate" required>
 							<label for="first-name">Nombre</label>
 						</div>
 						<div class="input-field col s6">
-							<input id="last-name" type="text" class="validate" required>
+							<input ng-model="user.last_name" id="last-name" type="text" class="validate" required>
 							<label for="last-name">Apellido</label>
 						</div>
 						<div class="input-field col s6">
-							<input id="email" type="email" name="email" ng-model="email" class="validate" required>
+							<input ng-model="user.email" id="email" type="email" name="email" ng-model="email" class="validate" required>
 							<label for="email">Correo electrónico</label>
 						</div>
 						<p class="alert alert-danger" ng-show="form-register.email.$error.email">Tu correo es inválido.</p>
 						<div class="input-field col s6">
-							<input id="password" type="password" name="password" ng-model="password" ng-minlength='6' class="validate" required>
+							<input ng-model="user.password" id="password" type="password" name="password" ng-model="password" ng-minlength='6' class="validate" required>
 							<label for="password">Clave</label>
 						</div>
 						<p class="alert alert-danger" ng-show="form-register.password.$error.minlength || form.password.$invalid">Tu clave debe tener al menos 6 caracteres.</p>
