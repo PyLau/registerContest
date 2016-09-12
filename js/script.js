@@ -4,7 +4,7 @@ angular
 	.run(function($httpBackend){
 
 		$httpBackend.whenPOST('/valid').respond(function(method, url, data) {
-			return [200, {'valid':true}, {}];
+			return [200, {'valid':false}, {}];
 		});
 		$httpBackend.whenPOST('/register').respond(function(method, url, data) {
 			return [200, {'user': {'name': 'Laura', 'lastname': 'Parra', 'email': 'lauraparra89@gmail.com', 'pass' : '123456'}}, {}];
