@@ -11,13 +11,12 @@
 	</head>
 	<body ng-app="myApp">
 		<div class="container">
-			<div id="signup">
 				<div class="signup-screen">
 					<div class="space-bot text-center">
 						<h1>Login</h1>
 						<div class="divider"></div>
 					</div>
-					<div ng-controller="RegisterCtrl" ng-init="showRegister = false">
+					<div ng-controller="RegisterCtrl">
 						<form class="form-login" method="post" name="login" novalidate>
 							<div class="input-field col s6">
 								<input ng-model="user.ci" id="ci" type="number" name="ci" ng-minlength='6' class="validate" required>
@@ -44,15 +43,24 @@
 								<input ng-model="user.last_name" id="last-name" type="text" class="validate" required>
   								<label for="last-name">Apellido</label>
   							</div>
+  							<div class="input-field col s6">
+ 								<input ng-model="user.email" id="email" type="email" name="email" ng-model="email" class="validate" required>
+  								<label for="email">Correo electrónico</label>
+  							</div>
+  							<p class="alert alert-danger" ng-show="form-register.email.$error.email">Tu correo es inválido.</p>
+  							<div class="input-field col s6">
+								<input ng-model="user.password" id="password" type="password" name="password" ng-model="password" ng-minlength='6' class="validate" required>
+  								<label for="password">Clave</label>
+  							</div>
 						</form>
 					</div>
 				</div>
-			</div>
 		</div>
 		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-mocks.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
 		<script src="js/script.js"></script>
 	</body>
 </html>

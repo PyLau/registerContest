@@ -1,5 +1,5 @@
 angular
-	.module("myApp", ['ngMockE2E'])
+	.module("myApp", ['ngMockE2E','ngAnimate'])
 
 	.run(function($httpBackend){
 		$httpBackend.whenPOST('/valid').respond(function(method, url, data) {
@@ -8,10 +8,12 @@ angular
 	})
 
 	.controller("RegisterCtrl", function ($scope, $http) {
+		$scope.showRegister = false;
 		$scope.validate = function(){
 			$http.post('/valid', $scope.user).then(function(response){
 				if (!response.data.valid){
-					showRegister = true;
+					$scope.showRegister = true;
+					$(".form-login").hide();
 					console.log(response.data.valid);
 				}
 			});
