@@ -4,7 +4,7 @@ angular
 	.run(function($httpBackend){
 
 		$httpBackend.whenPOST('/valid').respond(function(method, url, data) {
-			return [200, {'valid':false}, {}];
+			return [200, {'valid':true}, {}];
 		});
 		$httpBackend.whenPOST('/register').respond(function(method, url, data) {
 			return [200, {'user': {'name': 'Laura', 'lastname': 'Parra', 'email': 'lauraparra89@gmail.com', 'pass' : '123456'}}, {}];
@@ -27,6 +27,7 @@ angular
 						console.log(response);
 					});
 				}else{
+					$(".form-login").hide();
 					$scope.showAnswers = true;
 					$http.post('/answers', $scope.user).then(function(response){
 						console.log(response);
