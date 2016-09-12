@@ -26,11 +26,11 @@
 							<p class="alert alert-danger" ng-show="form-login.ci.$error.minlength || form.ci.$invalid">Tu cédula debe tener al menos 6 caracteres.</p>
 
 							<div class="space-top text-center">
-								<button ng-click="validate()" ng-model="ci" ng-disabled="form-login.$invalid" class="waves-effect waves-light btn done">
-									<i class="material-icons left">done</i> Listo
-								</button>
 								<button type="button" class="waves-effect waves-light btn cancel">
 									<i class="material-icons left">clear</i>Cancelar
+								</button>
+								<button ng-click="validate()" ng-model="ci" ng-disabled="form-login.$invalid" class="waves-effect waves-light btn done">
+									<i class="material-icons left">done</i> Listo
 								</button>
 							</div>
 						</form>
@@ -52,6 +52,40 @@
 								<input ng-model="user.password" id="password" type="password" name="password" ng-model="password" ng-minlength='6' class="validate" required>
   								<label for="password">Clave</label>
   							</div>
+							<div class="space-top text-center">
+								<button type="button" class="waves-effect waves-light btn cancel">
+									<i class="material-icons left">clear</i>Cancelar
+								</button>
+								<button ng-click="registerf()" ng-disabled="form-register.$invalid" class="waves-effect waves-light btn done">
+									<i class="material-icons left">done</i> Listo
+								</button>
+							</div>
+						</form>
+						<form class="form-answers" ng-if="showAnswers" method="post" name="answers" novalidate>
+							<div class="input-field col s6">
+								<input ng-model="user.a1" id="a1" type="text" class="validate" required>
+  								<label for="a1">1</label>
+  							</div>
+  							<div class="input-field col s6">
+								<input ng-model="user.a2" id="a2" type="text" class="validate" required>
+  								<label for="a2">2</label>
+  							</div>
+							<div class="input-field col s6">
+								<input ng-model="user.a3" id="a3" type="text" class="validate" required>
+  								<label for="a3">3</label>
+  							</div>
+  							<div class="input-field col s6">
+								<input ng-model="user.a4" id="a4" type="text" class="validate" required>
+  								<label for="a4">4</label>
+  							</div>
+							<div class="space-top text-center">
+								<button type="button" class="waves-effect waves-light btn cancel">
+									<i class="material-icons left">clear</i>Cancelar
+								</button>
+								<button ng-disabled="form-answers.$invalid" class="waves-effect waves-light btn done">
+									<i class="material-icons left">done</i> Listo
+								</button>
+							</div>
 						</form>
 					</div>
 				</div>
