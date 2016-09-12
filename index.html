@@ -24,7 +24,7 @@
 								<label for="ci">Cédula</label>
 							</div>
 							
-							<p class="alert alert-danger" ng-show="lform-login.ci.$error.minlength || form.ci.$invalid">Tu cédula debe tener al menos 6 caracteres.</p>
+							<p class="alert alert-danger" ng-show="form-login.ci.$error.minlength || form.ci.$invalid">Tu cédula debe tener al menos 6 caracteres.</p>
 
 							<div class="space-top text-center">
 								<button ng-click="validate()" ng-model="ci" ng-disabled="form-login.$invalid" class="waves-effect waves-light btn done">
@@ -37,11 +37,11 @@
 						</form>
 						<form class="form-register" ng-if="showRegister" method="post" name="register" novalidate>
 							<div class="input-field col s6">
- -								<input ng-model="user.first_name" id="first-name" type="text" class="validate" required>
+								<input ng-model="user.first_name" id="first-name" type="text" class="validate" required>
   								<label for="first-name">Nombre</label>
   							</div>
   							<div class="input-field col s6">
- +								<input ng-model="user.last_name" id="last-name" type="text" class="validate" required>
+								<input ng-model="user.last_name" id="last-name" type="text" class="validate" required>
   								<label for="last-name">Apellido</label>
   							</div>
 						</form>
