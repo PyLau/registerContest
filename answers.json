@@ -1,0 +1,18 @@
+{
+	"user":41,
+	"contestId":221,
+	"answers":[
+		{
+			"item":1,
+			"answer":"Respuesta a la primera pregunta"
+		},
+		{
+			"item":3,
+			"answer":"Respuesta a la tercera pregunta"
+		},
+		{
+			"item":4,
+			"answer":"Respuesta a la cuarta pregunta"
+		}
+	]
+}

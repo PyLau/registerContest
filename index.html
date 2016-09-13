@@ -5,7 +5,6 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 		<link rel="stylesheet" href="css/styles.css">
 	</head>
@@ -49,8 +48,8 @@
   							</div>
   							<p class="alert alert-danger" ng-show="form-register.email.$error.email">Tu correo es inválido.</p>
   							<div class="input-field col s6">
-								<input ng-model="user.password" id="password" type="password" name="password" ng-model="password" ng-minlength='6' class="validate" required>
-  								<label for="password">Clave</label>
+								<input ng-model="user.phone" id="phone" type="number" name="phone" ng-minlength='6' class="validate" required>
+  								<label for="phone">Teléfono</label>
   							</div>
 							<div class="space-top text-center">
 								<button type="button" class="waves-effect waves-light btn cancel">
