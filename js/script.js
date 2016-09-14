@@ -3,7 +3,7 @@ angular
 
 	.run(function($httpBackend){
 
-		$httpBackend.whenPOST('/valid').respond(function(method, url, data) {
+		$httpBackend.whenGET('/validservice/').respond(function(method, url, data) {
 			return [200, {'status':false}, {}];
 		});
 		$httpBackend.whenPOST('/register').respond(function(method, url, data) {
@@ -18,30 +18,36 @@ angular
 		$scope.showRegister = false;
 		$scope.showAnswers = false;
 		$scope.validate = function(){
-			$http.post('/valid', $scope.user).then(function(response){
+			$http.get('/validservice/' + $scope.user.ci).then(function(response){
 				if (!response.data.status){
 					$scope.showRegister = true;
 					$(".form-login").hide();
 					console.log(response.data.status);
-					$http.post('/register', $scope.user).then(function(response){
+					$http.post('/register', data).then(function(response){
 						console.log(response);
 					});
 				}else{
 					$(".form-login").hide();
-					$scope.showAnswers = true;
-					$http.post('/answers', $scope.user).then(function(response){
-						console.log(response);
-					});
+					registerFunction()
 				}
 			});
 		};
 		$scope.registerf = function(){
-			$http.post('/answers', $scope.user).then(function(response){
-				$(".form-register").hide();
+			$(".form-register").hide();
+			registerFunction();
+		};
+
+		function registerFunction(){
+			var data = $.param({
+            	name: $scope.user.first_name,
+            	lastName: $scope.user.last_name
+           	});
+			$http.post('/answers', data).then(function(response){
+				console.log(data);
 				$scope.showAnswers = true;
 				console.log(response);
 			});
-		};
+		}
 	})
 
 
