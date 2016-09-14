@@ -3,11 +3,11 @@ angular
 
 	.run(function($httpBackend){
 
-		$httpBackend.whenGET('/validservice/').respond(function(method, url, data) {
-			return [200, {'status':false}, {}];
+		$httpBackend.whenGET(new RegExp('\\/validservice\\/[0-9]+')).respond(function(method, url, data) {
+			return [200, {'status':true}, {}];
 		});
 		$httpBackend.whenPOST('/register').respond(function(method, url, data) {
-			return [200, {'user': {'name': 'Laura', 'lastname': 'Parra', 'email': 'lauraparra89@gmail.com', 'pass' : '123456'}}, {}];
+			return [200, {'answers': {'a1': '', 'a2': '', 'a3': '', 'a4' : ''}}, {}];
 		});
 		$httpBackend.whenPOST('/answers').respond(function(method, url, data) {
 			return [200, {'answers': {'a1': 'Japon', 'a2': '', 'a3': '', 'a4' : ''}}, {}];
@@ -15,20 +15,27 @@ angular
 	})
 
 	.controller("RegisterCtrl", function ($scope, $http) {
-		$scope.showRegister = false;
-		$scope.showAnswers = false;
+		$scope.showRegister = false; //primera pantalla sin registro
+		$scope.showAnswers = false; //primera pantalla sin respuestas
 		$scope.validate = function(){
-			$http.get('/validservice/' + $scope.user.ci).then(function(response){
-				if (!response.data.status){
-					$scope.showRegister = true;
-					$(".form-login").hide();
-					console.log(response.data.status);
-					$http.post('/register', data).then(function(response){
+			$http.get('/validservice/' + $scope.user.ci).then(function(response){ //envio la cedula del usuario al servicio de validacion de usuario
+				console.log(response.data.status);
+				if (!response.data.status){ //si es falso el usuario no esta registrado
+					$scope.showRegister = true; // muestro el registro
+					$(".form-login").hide(); //escondo el login
+					var data = $.param({ // guardo la data del usuario que ingresa en el formulario
+		            	name: $scope.user.first_name,
+		            	lastName: $scope.user.last_name,
+		            	ci: $scope.user.ci,
+		            	email: $scope.user.mail,
+		            	phone: $scope.user.phone
+		           	});
+					$http.post('/register', data).then(function(response){ //envio los datos del usuario al servicio que lo registra y me devuelve el id y las respuestas vacias 
 						console.log(response);
 					});
-				}else{
-					$(".form-login").hide();
-					registerFunction()
+				}else{ // si es verdadero el usuario esta registrado
+					$(".form-login").hide(); //se esconde el login
+					registerFunction();
 				}
 			});
 		};
@@ -40,12 +47,16 @@ angular
 		function registerFunction(){
 			var data = $.param({
             	name: $scope.user.first_name,
-            	lastName: $scope.user.last_name
+            	lastName: $scope.user.last_name,
+            	ci: $scope.user.ci,
+            	email: $scope.user.mail,
+            	phone: $scope.user.phone
            	});
 			$http.post('/answers', data).then(function(response){
 				console.log(data);
 				$scope.showAnswers = true;
 				console.log(response);
+				$scope.user.a1 = response.data.answers.a1;
 			});
 		}
 	})
