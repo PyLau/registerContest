@@ -16,9 +16,9 @@
 						<div class="divider"></div>
 					</div>
 					<div ng-controller="RegisterCtrl">
-						<form class="form-login" method="post" name="login" novalidate>
+						<form class="form-login" ng-show="showLogin" method="post" name="login" novalidate>
 							<div class="input-field col s6">
-								<input ng-model="user.ci" id="ci" type="number" name="ci" ng-minlength='6' class="validate" required>
+								<input ng-model="user.ci" type="number"  ng-minlength='6' class="validate" required>
 								<label for="ci">Cédula</label>
 							</div>
 							
@@ -61,9 +61,9 @@
 							</div>
 						</form>
 						<form class="form-answers" ng-if="showAnswers" method="post" name="answers" novalidate>
-							<div ng-repeat="item in answers" class="input-field col s6">
+							<div ng-repeat="item in answersResp" class="input-field col s6">
 								<input type="text" class="validate" required>
-  								<label for="{{item.pubDate}}">{{item.answer}}</label>
+  								<label for="{{item.pubDate}}">{{item.pubDate}}</label>
   							</div>
 							<div class="space-top text-center">
 								<button type="button" class="waves-effect waves-light btn cancel">
