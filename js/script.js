@@ -39,7 +39,7 @@ angular
 		};
 		$scope.registerf = function(){
 			$scope.showRegister = false; //se esconde el registro
-			$scope.showAnswers = true;
+			$scope.showAnswers = true; 
 			var data = $.param({ // guardo la data del usuario que ingresa en el formulario
 		            	name: $scope.user.first_name,
 		            	lastName: $scope.user.last_name,
@@ -50,6 +50,7 @@ angular
 			console.log(data);
 			$http.post('/register', data).then(function(response){ //envio los datos del usuario al servicio que lo registra y me devuelve el id y las respuestas vacias 
 				console.log(response);
+				$scope.answersResp = response.data.answers;
 			});
 		}
 		$scope.sendAnswers = function(){
