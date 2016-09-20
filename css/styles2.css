@@ -1,0 +1,32 @@
+.container {
+    max-width: 600px;
+    max-height: 800px;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+md-content {
+	background-color: #EBEBEB;
+}
+
+.header-text {
+	color: #7D7D7D;
+}
+
+.header-text h1{
+	text-align: center;
+	text-transform: uppercase;
+}
+
+/*md-input-container:not(.md-input-invalid).md-input-focused .md-input {
+	border-color: #E53935;
+}
+
+md-input-container:not(.md-input-invalid).md-input-focused label {
+	color: #E53935;
+}
+
+.md-button.md-primary.md-raised, .md-button.md-primary.md-raised:not([disabled]):hover {
+    background-color: red;
+}*/
+
