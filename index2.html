@@ -12,7 +12,7 @@
 	<body>
 	 <div ng-controller="DemoCtrl" class="md-inline-form inputdemoBasicUsage" ng-app="MyApp">
 		<div class="container md-whiteframe-5dp">	
-				 <md-content md-theme="docs-dark" layout-padding="">
+				 <md-content ng-show="showLogin" md-theme="docs-dark" layout-padding="">
 					<div class="header-text">
 						<h1>Login</h1>
 						<hr flex="">
@@ -22,7 +22,7 @@
 								<label>Ingresa tu cédula</label>
 								<input ng-model="user.ci">
 							</md-input-container>
-						<md-button class="md-raised md-primary">Listo</md-button>
+						<md-button ng-click="validate()" class="md-raised md-primary">Listo</md-button>
 					</form>
 				</md-content>
 			</div>
@@ -40,23 +40,15 @@
 		<script type="text/javascript">    
 		    angular
 		      .module('MyApp',['ngMaterial', 'ngMessages', 'material.svgAssetsCache'])
-		      .controller('DemoCtrl', function($scope) {
-		        $scope.user = {
-		          title: 'Developer',
-		          email: 'ipsum@lorem.com',
-		          firstName: '',
-		          lastName: '',
-		          company: 'Google',
-		          address: '1600 Amphitheatre Pkwy',
-		          city: 'Mountain View',
-		          state: 'CA',
-		        };
-		        $scope.states = ('AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS ' +
-		        'MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI ' +
-		        'WY').split(' ').map(function(state) {
-		            return {abbrev: state};
-		          });
+		      .controller('DemoCtrl', function($scope, $http) {
+		      	$scope.showLogin = true;
+		      	$scope.validate = function(){
+					$http.get('http://10.3.0.186:8080/ContestAdmin/services/questions/user/81/' + $scope.user.ci).then(function(response){ //envio la cedula del usuario al servicio de validacion de usuario
+						console.log(response.data.status);
+					});
+				};
 		      })
+
 		      .config(function($mdThemingProvider) {
 		        // Configure a dark theme with primary foreground yellow
 		        $mdThemingProvider.theme('docs-dark', 'default')

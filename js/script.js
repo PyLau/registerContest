@@ -5,18 +5,22 @@ angular
 		$scope.showRegister = false; //primera pantalla sin registro
 		$scope.showAnswers = false; //primera pantalla sin respuestas
 		$scope.validate = function(){
-			$http.get('http://10.3.0.186:8080/ContestAdmin/services/questions/user/81/' + $scope.user.ci).then(function(response){ //envio la cedula del usuario al servicio de validacion de usuario
-				console.log(response.data.status);
-				if (!response.data.status){ //si es falso el usuario no esta registrado
-					$scope.showLogin = false; //escondo el login
-					$scope.showRegister = true; // muestro el registro
-				}else{ // si es verdadero el usuario esta registrado
-					$scope.showLogin = false; //se esconde el login
-					// $scope.showAnswers = true;
-					// console.log(response.data.answers);
-					// $scope.answersResp = response.data.answers;
-				}
-			});
+			$http.get('http://10.3.0.186:8080/ContestAdmin/services/questions/user/81/' + $scope.user.ci) //envio la cedula del usuario al servicio de validacion de usuario
+	         .success(function (data) {
+	            console.log(data.status);
+	            $scope.isLoading = true;
+	            $scope.showLogin = false;
+	            if (!data.status){ //si es falso el usuario no esta registrado
+	              $scope.isLoading = false;
+	              // $scope.showRegister = true; // muestro el registro
+	            }else{ // si es verdadero el usuario esta registrado
+	            	 $scope.isLoading = false;
+	               //se esconde el login
+	              // $scope.showAnswers = true;
+	              // console.log(data.answers);
+	              // $scope.answersResp = data.answers;
+	            }
+	          });
 		};
 		$scope.registerf = function(){
 			$scope.showRegister = false; //se esconde el registro
