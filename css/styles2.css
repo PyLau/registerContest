@@ -18,6 +18,25 @@ md-content {
 	text-transform: uppercase;
 }
 
+.loading{
+	position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color:grey;
+    opacity: .7;
+    z-index: 1000;
+}
+
+md-progress-circular{
+    position: absolute;
+    z-index: 1000;
+    left: 50%;
+    top: 20%;
+}
+
+
 /*md-input-container:not(.md-input-invalid).md-input-focused .md-input {
 	border-color: #E53935;
 }
@@ -29,4 +48,3 @@ md-input-container:not(.md-input-invalid).md-input-focused label {
 .md-button.md-primary.md-raised, .md-button.md-primary.md-raised:not([disabled]):hover {
     background-color: red;
 }*/
-
