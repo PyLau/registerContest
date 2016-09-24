@@ -117,14 +117,14 @@ input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly
     box-shadow: 0 1px 0 0 #E57373;
 }
 
-form.form-register{
+/*form.form-register{
   height: 0;
      -webkit-animation: slide 1s ease 1s forwards;
     animation: slide 1s ease 1s forwards;
     z-index: 1; 
 }
 
-@-webkit-keyframes slide /* Safari and Chrome */
+@-webkit-keyframes slide /* Safari and Chrome 
 {
 from {height: 0;}
 to {height: 300px;}
@@ -138,4 +138,4 @@ to {height:300px;}
 
 form.form-login{
     z-index: 1;
-}
+}*/*/

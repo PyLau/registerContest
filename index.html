@@ -1,91 +1,59 @@
-<html>
-	<head>
-		<title>Registro</title>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
-		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-		<link rel="stylesheet" href="css/styles.css">
-	</head>
-	<body ng-app="myApp">
-		<div class="container">
-				<div class="signup-screen">
-					<div class="space-bot text-center">
-						<h1>Login</h1>
-						<div class="divider"></div>
-					</div>
-					<div ng-controller="RegisterCtrl">
-						<form class="form-login" ng-show="showLogin" method="post" name="login" novalidate>
-							<div class="input-field col s6">
-								<input ng-model="user.ci" type="number"  ng-minlength='6' class="validate" required>
-								<label for="ci">Cédula</label>
-							</div>
-							
-							<p class="alert alert-danger" ng-show="form-login.ci.$error.minlength || form.ci.$invalid">Tu cédula debe tener al menos 6 caracteres.</p>
+<html lang="en">
+<head>
+ <title>Concurso</title>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <!-- Angular Material style sheet -->
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+ <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+ <link rel="stylesheet" href="https://material.angularjs.org/1.1.1/docs.css">
+ <link rel="stylesheet" href="css/styles2.css">
+</head>
+<body>
+  <div ng-controller="DemoCtrl" class="md-inline-form inputdemoBasicUsage" ng-app="MyApp">
+<!--    <div class="loading" ng-show="isLoading"></div>
+    <md-progress-circular ng-show="isLoading" md-mode="indeterminate"></md-progress-circular> -->
+    <div class="container md-whiteframe-5dp">	
+     <md-content layout-padding="">
+       <div class="header-text">
+        <h1>Login</h1>
+        <hr flex="">
+      </div>
+      <form ng-show="showLogin" method="post" name="userForm" novalidate>
+       <md-input-container class="md-block" flex-gt-sm="">
+        <label>Ingresa tu cédula</label>
+        <input name="mycedula" type="number" ng-model="user.ci"  ng-required="true" ng-minlength="6" ng-maxlength="8"/>
+         <div ng-messages="userForm.mycedula.$error">
+          <div ng-message="required">Campo requerido</div>
+          <div ng-message="maxlength">Máximo 8 caracteres</div>
+          <div ng-message="minlength">Mínimo 6 caracteres</div>
+        </div>
+      </md-input-container>
+      <md-button ng-disabled="userForm.$invalid" ng-click="validate()" class="md-raised md-primary">Listo</md-button>
+    </form>
+      <form ng-show="showRegister" method="post" name="registerForm" novalidate>
+       <md-input-container class="md-block" flex-gt-sm="">
+        <label>Nombre</label>
+        <input name="name" type="text" ng-model="user.name" ng-required="true"/>
+      </md-input-container>
+      <md-button ng-disabled="registerForm.$invalid" ng-click="register()" class="md-raised md-primary">Listo</md-button>
+    </form>
+  </md-content>
+</div>
 
-							<div class="space-top text-center">
-								<button type="button" class="waves-effect waves-light btn cancel">
-									<i class="material-icons left">clear</i>Cancelar
-								</button>
-								<button ng-click="validate()" ng-model="ci" ng-disabled="form-login.$invalid" class="waves-effect waves-light btn done">
-									<i class="material-icons left">done</i> Listo
-								</button>
-							</div>
-						</form>
-						<form class="form-register" ng-if="showRegister" method="post" name="register" novalidate>
-							<div class="input-field col s6">
-								<input ng-model="user.first_name" id="first-name" type="text" class="validate" required>
-  								<label for="first-name">Nombre</label>
-  							</div>
-  							<div class="input-field col s6">
-								<input ng-model="user.last_name" id="last-name" type="text" class="validate" required>
-  								<label for="last-name">Apellido</label>
-  							</div>
-  							<div class="input-field col s6">
- 								<input ng-model="user.email" id="email" type="email" name="email" ng-model="email" class="validate" required>
-  								<label for="email">Correo electrónico</label>
-  							</div>
-  							<p class="alert alert-danger" ng-show="form-register.email.$error.email">Tu correo es inválido.</p>
-  							<div class="input-field col s6">
-								<input ng-model="user.phone" id="phone" type="number" name="phone" ng-minlength='6' class="validate" required>
-  								<label for="phone">Teléfono</label>
-  							</div>
-  								<div class="input-field col s6">
-								<input ng-model="user.address" id="address" type="text" name="address" class="validate" required>
-  								<label for="address">Ciudad</label>
-  							</div>
-							<div class="space-top text-center">
-								<button type="button" class="waves-effect waves-light btn cancel">
-									<i class="material-icons left">clear</i>Cancelar
-								</button>
-								<button ng-click="registerf()" ng-disabled="form-register.$invalid" class="waves-effect waves-light btn done">
-									<i class="material-icons left">done</i> Listo
-								</button>
-							</div>
-						</form>
-						<form class="form-answers" ng-if="showAnswers" method="post" name="answers" novalidate>
-							<div ng-repeat="item in answersResp" class="input-field col s6">
-								<input type="text" class="validate" required>
-  								<label for="{{item.pubDate}}">{{item.pubDate}}</label>
-  							</div>
-							<div class="space-top text-center">
-								<button type="button" class="waves-effect waves-light btn cancel">
-									<i class="material-icons left">clear</i>Cancelar
-								</button>
-								<button ng-click="sendAnswers()" ng-disabled="form-answers.$invalid" class="waves-effect waves-light btn done">
-									<i class="material-icons left">done</i> Listo
-								</button>
-							</div>
-						</form>
-					</div>
-				</div>
-		</div>
-		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-		<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-mocks.js"></script> -->
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
-		<script src="js/script.js"></script>
-	</body>
-</html>
+</div>
+<!-- Angular Material requires Angular.js Libraries -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/svg-assets-cache.js"></script>
+<!-- Angular Material Library -->
+<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-mocks.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
+<!-- Your application js -->
+<script src="js/script4.js"></script>
+      </body>
+      </html>
