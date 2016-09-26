@@ -33,8 +33,40 @@
     </form>
       <form ng-show="showRegister" method="post" name="registerForm" novalidate>
        <md-input-container class="md-block" flex-gt-sm="">
-        <label>Nombre</label>
+        <label for="name">Nombre</label>
         <input name="name" type="text" ng-model="user.name" ng-required="true"/>
+        <div ng-messages="registerForm.name.$error">
+          <div ng-message="required">Campo requerido</div>
+        </div>
+      </md-input-container>
+   	  <md-input-container class="md-block" flex-gt-sm="">
+        <label for="lastname">Apellido</label>
+        <input name="lastname" type="text" ng-model="user.lastname" ng-required="true"/>
+        <div ng-messages="registerForm.lastname.$error">
+        	<div ng-message="required">Campo requerido</div>
+        </div>
+      </md-input-container>
+   	  <md-input-container class="md-block" flex-gt-sm="">
+        <label for="phone">Número de teléfono</label>
+        <input name="phone" type="number" ng-model="user.phone" ng-required="true"/>
+         <div ng-messages="registerForm.phone.$error">
+          <div ng-message="required">Campo requerido</div>
+        </div>
+      </md-input-container>
+       <md-input-container class="md-block" flex-gt-sm="">
+        <label for="mail">Correo electrónico</label>
+        <input name="mail" type="email" ng-model="user.mail" ng-required="true"/>
+        <div ng-messages="registerForm.mail.$error">
+          <div ng-message="required">Campo requerido</div>
+        </div>
+      </md-input-container>
+      <md-input-container class="md-block" flex-gt-sm="">
+    <!--   	<select name="stateSelect" ng-model="user.state">
+      		<option ng-repeat="state in user.states" value="{{state.name}}">{{state.name}}</option>
+    	</select> -->
+    	<md-select name="stateSelect" ng-model="state">
+          <md-option ng-repeat="state in states" value="{{state}}">{{state}}</md-option>
+        </md-select>
       </md-input-container>
       <md-button ng-disabled="registerForm.$invalid" ng-click="register()" class="md-raised md-primary">Listo</md-button>
     </form>

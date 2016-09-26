@@ -11,7 +11,6 @@ md-content {
 
 form {
     transition: 0.5s linear all;
-    opacity: 1;
 }
 
 form.ng-hide {
