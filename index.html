@@ -16,7 +16,7 @@
     <div class="container md-whiteframe-5dp">	
      <md-content layout-padding="">
        <div class="header-text">
-        <h1>Login</h1>
+        <h1>Síguele la pista al Beisbol</h1>
         <hr flex="">
       </div>
       <form ng-show="showLogin" method="post" name="userForm" novalidate>
@@ -32,6 +32,7 @@
       <md-button ng-disabled="userForm.$invalid" ng-click="validate()" class="md-raised md-primary">Listo</md-button>
     </form>
       <form ng-show="showRegister" method="post" name="registerForm" novalidate>
+       <h1 class="md-title">Registrate para poder participar</h1>
        <md-input-container class="md-block" flex-gt-sm="">
         <label for="name">Nombre</label>
         <input name="name" type="text" ng-model="user.name" ng-required="true"/>
@@ -58,21 +59,29 @@
         <input name="mail" type="email" ng-model="user.mail" ng-required="true"/>
         <div ng-messages="registerForm.mail.$error">
           <div ng-message="required">Campo requerido</div>
+          <div ng-message="email">Debe ingresar un correo electrónico válido</div>
         </div>
       </md-input-container>
       <md-input-container class="md-block" flex-gt-sm="">
-    <!--   	<select name="stateSelect" ng-model="user.state">
-      		<option ng-repeat="state in user.states" value="{{state.name}}">{{state.name}}</option>
-    	</select> -->
+      	<label>Estado</label>
     	<md-select name="stateSelect" ng-model="state">
           <md-option ng-repeat="state in states" value="{{state}}">{{state}}</md-option>
         </md-select>
       </md-input-container>
       <md-button ng-disabled="registerForm.$invalid" ng-click="register()" class="md-raised md-primary">Listo</md-button>
     </form>
+	<form ng-show="showAnswers" method="post" name="answersForm" novalidate>
+		<md-input-container ng-repeat="item in answersResp" class="md-block" flex-gt-sm="">
+        	<label for="{{item.pubDate}}">{{item.pubDate}}</label>
+        	<input name="answer" type="text" ng-model="user.name" ng-required="true"/>
+        	<div ng-messages="answersForm.answer.$error">
+          		<div ng-message="required">Campo requerido</div>
+        	</div>
+     	</md-input-container>
+		<md-button ng-disabled="answersForm.$invalid" ng-click="sendAnswers()" class="md-raised md-primary">Listo</md-button>					
+	</form>
   </md-content>
 </div>
-
 </div>
 <!-- Angular Material requires Angular.js Libraries -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
