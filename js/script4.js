@@ -35,7 +35,7 @@
     "Yaracuy",
     "Zulia"
     ];
-  // $scope.isLoading = false;
+  $scope.isLoading = true;
   $scope.showLogin = true;
   $scope.showRegister = false;
   $scope.validate = function(){
@@ -86,5 +86,5 @@
  .config(function($mdThemingProvider) {
   // Configure a dark theme with primary foreground yellow
   $mdThemingProvider.theme('default')
-  .primaryPalette('red')
+  .primaryPalette('blue')
 });
