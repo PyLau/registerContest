@@ -74,12 +74,9 @@
       <md-button ng-disabled="registerForm.$invalid" ng-click="register()" class="md-raised md-primary">Listo</md-button>
     </form>
 	<form ng-show="showAnswers" method="post" name="answersForm" novalidate>
-		<md-input-container ng-repeat="item in answersResp" class="md-block" flex-gt-sm="">
-        	<label for="{{item.pubDate}}">{{item.pubDate}}</label>
-        	<input name="answer" type="text" ng-model="user.name" ng-required="true"/>
-        	<div ng-messages="answersForm.answer.$error">
-          		<div ng-message="required">Campo requerido</div>
-        	</div>
+		<md-input-container ng-repeat="answer in answers" class="md-block" flex-gt-sm="">
+        	<label for="{{answer.pubDate}}">{{answer.pubDate }}</label>
+        	<input name="answer" type="text" ng-model="user.answer" ng-required="true"/>
      	</md-input-container>
 		<md-button ng-disabled="answersForm.$invalid" ng-click="sendAnswers()" class="md-raised md-primary">Listo</md-button>					
 	</form>

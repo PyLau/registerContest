@@ -43,7 +43,7 @@
       $scope.isLoading = true;
       $http.get('http://widget.eluniversal.com/ContestAdmin/services/questions/user/281/' + $scope.user.ci, {headers : { 
         'Content-Type': 'application/json;charset=utf-8;'
-      }}) //envio la cedula del usuario al servicio de validacion de usuario
+      }})
       .success(function (data) {
        console.log(data.status);
             // $scope.isLoading = true;
@@ -76,23 +76,22 @@
                   "address": $scope.state
                };
       console.log(data);
+      $http.post('http://widget.eluniversal.com/ContestAdmin/services/questions/user/register/281/', data, {headers : { 
+        'Content-Type': 'application/json;charset=utf-8;'
+      }}) //envio la cedula del usuario al servicio de validacion de usuario
+            .success(function (data) {
+               console.log(data);
+               var userid = data.user.id;
+               console.log(userid);
+               $scope.answers = data.answers;
+      });
+   };
 
-         // var config = {
-         //        headers : {
-         //            'Content-Type': 'application/json;charset=utf-8;'
-         //        }
-         //    }
-          // $http.post('http://10.3.0.186:8080/ContestAdmin/services/questions/user/register/81', data, config ).then(function(response){ //envio los datos del usuario al servicio que lo registra y me devuelve el id y las respuestas vacias 
-            // console.log(response);
-            // $scope.answersResp = response.data.answers;
-         // });
-      }
-   })
-
-
+})
 
  .config(function($mdThemingProvider) {
   // Configure a dark theme with primary foreground yellow
   $mdThemingProvider.theme('default')
   .primaryPalette('blue')
 });
+
