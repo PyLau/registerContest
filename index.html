@@ -1,100 +1,150 @@
 <html lang="en">
 <head>
- <title>Concurso</title>
- <meta charset="utf-8">
- <meta name="viewport" content="width=device-width, initial-scale=1">
- <!-- Angular Material style sheet -->
- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
- <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
- <link rel="stylesheet" href="https://material.angularjs.org/1.1.1/docs.css">
- <link rel="stylesheet" href="css/styles2.css">
+  <title>Concurso</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Angular Material style sheet -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+  <link rel="stylesheet" href="https://material.angularjs.org/1.1.1/docs.css">
+  <link rel="stylesheet" href="css/styles2.css">
 </head>
 <body>
-  <div ng-controller="DemoCtrl" class="md-inline-form inputdemoBasicUsage" ng-app="MyApp">
-  <div class="loading" ng-show="isLoading"></div>
-    <md-progress-circular ng-show="isLoading" md-mode="indeterminate"></md-progress-circular>
-    <div class="container md-whiteframe-5dp">	
-     <md-content layout-padding="">
-       <div class="header-text">
-        <h1>Síguele la pista al Beisbol</h1>
-        <hr flex="">
+  <div ng-controller="BasicDemoCtrl as ctrl" class="md-inline-form inputdemoBasicUsage" ng-app="MyApp">
+    <div ng-init="ctrl.showDialog()"></div>
+    <div class="loading" ng-show="isLoading"></div>
+<!--     <div class="animate-slide" ng-hide="slide" ng-click="slide=!slide"></div>
+      <div class="loading" ng-show="isLoading"></div> -->
+      <md-progress-circular ng-show="isLoading" md-mode="indeterminate"></md-progress-circular>
+      <div class="container md-whiteframe-5dp">	
+        <md-content layout-padding="">
+          <div class="header-text">
+            <h1>Síguele la pista al Beisbol</h1>
+            <hr flex="">
+          </div>
+          <form ng-show="showLogin" method="post" name="userForm" novalidate>
+            <md-input-container class="md-block" flex-gt-sm="">
+              <label>Ingresa tu cédula</label>
+              <input name="mycedula" type="number" ng-model="user.ci"  ng-required="true" ng-minlength="6" ng-maxlength="8"/>
+              <div ng-messages="userForm.mycedula.$error">
+                <div ng-message="required">Campo requerido</div>
+                <div ng-message="maxlength">Máximo 8 caracteres</div>
+                <div ng-message="minlength">Mínimo 6 caracteres</div>
+              </div>
+            </md-input-container>
+            <md-button ng-disabled="userForm.$invalid" ng-click="validate()" class="md-raised md-primary">Listo</md-button>
+          </form>
+          <form ng-show="showRegister" method="post" name="registerForm" novalidate>
+            <h1 class="md-title">Registrate para poder participar</h1>
+            <md-input-container class="md-block" flex-gt-sm="">
+              <label for="name">Nombre</label>
+              <input name="name" type="text" ng-model="user.name" ng-required="true"/>
+              <div ng-messages="registerForm.name.$error">
+                <div ng-message="required">Campo requerido</div>
+              </div>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm="">
+              <label for="lastname">Apellido</label>
+              <input name="lastname" type="text" ng-model="user.lastname" ng-required="true"/>
+              <div ng-messages="registerForm.lastname.$error">
+                <div ng-message="required">Campo requerido</div>
+              </div>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm="">
+              <label for="phone">Número de teléfono</label>
+              <input name="phone" type="number" ng-model="user.phone" ng-required="true"/>
+              <div ng-messages="registerForm.phone.$error">
+                <div ng-message="required">Campo requerido</div>
+              </div>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm="">
+              <label for="mail">Correo electrónico</label>
+              <input name="mail" type="email" ng-model="user.mail" ng-required="true"/>
+              <div ng-messages="registerForm.mail.$error">
+                <div ng-message="required">Campo requerido</div>
+                <div ng-message="email">Debe ingresar un correo electrónico válido</div>
+              </div>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm="">
+              <label>Estado</label>
+              <md-select name="stateSelect" ng-model="state" ng-required="true">
+                <md-option ng-repeat="state in states" value="{{state}}">{{state}}</md-option>
+              </md-select>
+              <div ng-messages="registerForm.stateSelect.$error">
+                <div ng-message="required">Campo requerido</div>
+              </div>
+            </md-input-container>
+            <md-button ng-disabled="registerForm.$invalid" ng-click="register()" class="md-raised md-primary">Listo</md-button>
+          </form>
+          <form ng-show="showAnswers" method="post" name="answersForm" novalidate>
+            <md-input-container ng-repeat="answer in answers" class="md-block" flex-gt-sm="">
+              <label for="{{answer.pubDate}}">{{answer.pubDate }}</label>
+              <input name="answer" type="text" ng-model="user.answer" ng-required="true"/>
+            </md-input-container>
+            <md-button ng-disabled="answersForm.$invalid" ng-click="sendAnswers()" class="md-raised md-primary">Listo</md-button>					
+          </form>
+        </md-content>
       </div>
-      <form ng-show="showLogin" method="post" name="userForm" novalidate>
-       <md-input-container class="md-block" flex-gt-sm="">
-        <label>Ingresa tu cédula</label>
-        <input name="mycedula" type="number" ng-model="user.ci"  ng-required="true" ng-minlength="6" ng-maxlength="8"/>
-         <div ng-messages="userForm.mycedula.$error">
-          <div ng-message="required">Campo requerido</div>
-          <div ng-message="maxlength">Máximo 8 caracteres</div>
-          <div ng-message="minlength">Mínimo 6 caracteres</div>
-        </div>
-      </md-input-container>
-      <md-button ng-disabled="userForm.$invalid" ng-click="validate()" class="md-raised md-primary">Listo</md-button>
-    </form>
-      <form ng-show="showRegister" method="post" name="registerForm" novalidate>
-       <h1 class="md-title">Registrate para poder participar</h1>
-       <md-input-container class="md-block" flex-gt-sm="">
-        <label for="name">Nombre</label>
-        <input name="name" type="text" ng-model="user.name" ng-required="true"/>
-        <div ng-messages="registerForm.name.$error">
-          <div ng-message="required">Campo requerido</div>
-        </div>
-      </md-input-container>
-   	  <md-input-container class="md-block" flex-gt-sm="">
-        <label for="lastname">Apellido</label>
-        <input name="lastname" type="text" ng-model="user.lastname" ng-required="true"/>
-        <div ng-messages="registerForm.lastname.$error">
-        	<div ng-message="required">Campo requerido</div>
-        </div>
-      </md-input-container>
-   	  <md-input-container class="md-block" flex-gt-sm="">
-        <label for="phone">Número de teléfono</label>
-        <input name="phone" type="number" ng-model="user.phone" ng-required="true"/>
-         <div ng-messages="registerForm.phone.$error">
-          <div ng-message="required">Campo requerido</div>
-        </div>
-      </md-input-container>
-       <md-input-container class="md-block" flex-gt-sm="">
-        <label for="mail">Correo electrónico</label>
-        <input name="mail" type="email" ng-model="user.mail" ng-required="true"/>
-        <div ng-messages="registerForm.mail.$error">
-          <div ng-message="required">Campo requerido</div>
-          <div ng-message="email">Debe ingresar un correo electrónico válido</div>
-        </div>
-      </md-input-container>
-      <md-input-container class="md-block" flex-gt-sm="">
-      	<label>Estado</label>
-        <md-select name="stateSelect" ng-model="state" ng-required="true">
-          <md-option ng-repeat="state in states" value="{{state}}">{{state}}</md-option>
-        </md-select>
-        <div ng-messages="registerForm.stateSelect.$error">
-          <div ng-message="required">Campo requerido</div>
-        </div>
-      </md-input-container>
-      <md-button ng-disabled="registerForm.$invalid" ng-click="register()" class="md-raised md-primary">Listo</md-button>
-    </form>
-	<form ng-show="showAnswers" method="post" name="answersForm" novalidate>
-		<md-input-container ng-repeat="answer in answers" class="md-block" flex-gt-sm="">
-        	<label for="{{answer.pubDate}}">{{answer.pubDate }}</label>
-        	<input name="answer" type="text" ng-model="user.answer" ng-required="true"/>
-     	</md-input-container>
-		<md-button ng-disabled="answersForm.$invalid" ng-click="sendAnswers()" class="md-raised md-primary">Listo</md-button>					
-	</form>
-  </md-content>
+  <script type="text/ng-template" id="panel.tmpl.html"><div role="dialog" layout="column" layout-align="center center">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>Reglas</h2>
+    </div>
+  </md-toolbar>
+
+  <div class="demo-dialog-content">
+    <h4>
+      Dirigido a mayores de edad.
+    </h4>
+    <h4>
+      Válida a nivel a nacional (excepto estados puerto libre) desde el 17/10/2016 hasta el 27/10/2016.
+    </h4>
+    <h4>
+      Las personas interesadas en participar deberán adquirir la edición impresa del diario El Universal desde el 17/10/2016 hasta el 27/10/2016.
+    </h4>
+    <h4>
+      Cada ejemplar tendrá impreso una (1) pregunta y una (1) respuesta diferente por día durante diez (10) días consecutivos; registrar la respuesta del día junto con sus datos personales (nombre, apellido, número de cédula de identidad, números telefónicos de contacto, correo electrónico y ciudad) en el sitio web del concurso a través del link: www.eluniversal.com/concursopelotas.
+    </h4>
+    <h4>
+        En lo sucesivo solo debe identificarse con su cédula de identidad e ingresar la respuesta que corresponda.
+    </h4>
+    <h4>
+      Los participantes tienen desde el lunes 17/10 hasta el jueves 27/10/2016 para ingresar las respuestas en la Web.
+    </h4>
+<h3>MECÁNICA</h3>
+La participación es acumulativa, se obtienen puntos por el registro inicial – 10 puntos - y cada vez que se ingrese una respuesta en la Web – 15 puntos-; adicionalmente los 10 primeros lectores que registren sus respuestas del día obtienen puntos adicionales – 10 puntos.
+Diariamente se actualizará y se publicará en la web un cuadro de posiciones indicando el ranking de los 10 participantes con mayor puntuación.
+El sábado 29/10/2016 se publicarán los resultados finales en la web y se adjudicarán los premios con base en el puntaje acumulado, son diez (10) ganadores que serán contactados inmediatamente vía telefónica y por correo electrónico.
+ 
+PREMIOS
+Veinticuatro (24) pelotas autografiadas por grandes ligas y peloteros de la LVBP temporada 2015-2016,  distribuidas en 10 ganadores.
+Fecha y lugar de entrega de premios: viernes 04/11/2016 a las 10:00AM en la sede del Diario El Universal C.A, en la Avenida Urdaneta, Esquina de Ánimas, Edificio El Universal, piso 7, La Candelaria. Caracas.
+Persona Responsable: Anabel Amaral. Teléfono: 0501-5052020. Email: vagregados@eluniversal.
+
+
+  </div>
+
+  <div layout="row" class="demo-dialog-button">
+    <md-button md-autofocus flex class="md-primary" ng-click="ctrl.closeDialog()">
+      Close
+    </md-button>
+  </div>
 </div>
-</div>
-<!-- Angular Material requires Angular.js Libraries -->
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
-<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/svg-assets-cache.js"></script>
-<!-- Angular Material Library -->
-<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-mocks.js"></script> -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
-<!-- Your application js -->
-<script src="js/script4.js"></script>
-      </body>
-      </html>
+</script></div>
+  </div>
+
+  <!-- Angular Material requires Angular.js Libraries -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+  <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/svg-assets-cache.js"></script>
+  <!-- Angular Material Library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-mocks.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
+  <!-- Your application js -->
+  <script src="js/script4.js"></script>
+</body>
+</html>
