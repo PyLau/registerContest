@@ -111,7 +111,8 @@ BasicDemoCtrl.prototype.showDialog = function() {
     zIndex: 150,
     clickOutsideToClose: true,
     escapeToClose: true,
-    focusOnOpen: true
+    focusOnOpen: true,
+    fullscreen: true
   };
 
   this._mdPanel.open(config);
