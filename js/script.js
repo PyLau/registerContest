@@ -1,135 +1,68 @@
- angular
- .module('MyApp',['ngMaterial', 'ngMessages', 'material.svgAssetsCache', 'ngAnimate'])
- // .run(function($httpBackend){
+angular
+  .module("myApp", ['ngMockE2E','ngAnimate'])
 
- //    var validTrue = {"status":false, "user":{"id":41, "name":"Wiljac", "lastName":"Aular", "cedula":"19960100", "email":"waular@eluniversal.com", "phone":"04129350470"}, "answers":[{"pubDate":"13/09/2016", "answer":"Respuesta 1", "position":"1", "status":true }, {"pubDate":"14/09/2016", "answer":"Respuesta 2", "position":"2", "status":true },{"pubDate":"15/09/2016", "position":"3", "status":false },{"pubDate":"16/09/2016", "position":"4", "status":false }, {"pubDate":"17/09/2016", "position":"5", "status":false },{"pubDate":"18/09/2016", "position":"6", "status":false },{"pubDate":"19/09/2016", "position":"7", "status":false }, {"pubDate":"20/09/2016", "position":"8", "status":false },{"pubDate":"21/09/2016", "position":"9", "status":false },{"pubDate":"22/09/2016", "position":"10", "status":false } ] };
+  .run(function($httpBackend){
 
- //    $httpBackend.whenGET('/validservice').respond(function(method, url, data) {
- //     return [200, validTrue, {}];
- //  });
- // })
+    var validTrue = {"status":true, "user":{"id":41, "name":"Wiljac", "lastName":"Aular", "cedula":"19960100", "email":"waular@eluniversal.com", "phone":"04129350470"}, "answers":[{"pubDate":"13/09/2016", "answer":"Respuesta 1", "position":"1", "status":true }, {"pubDate":"14/09/2016", "answer":"Respuesta 2", "position":"2", "status":true },{"pubDate":"15/09/2016", "position":"3", "status":false },{"pubDate":"16/09/2016", "position":"4", "status":false }, {"pubDate":"17/09/2016", "position":"5", "status":false },{"pubDate":"18/09/2016", "position":"6", "status":false },{"pubDate":"19/09/2016", "position":"7", "status":false }, {"pubDate":"20/09/2016", "position":"8", "status":false },{"pubDate":"21/09/2016", "position":"9", "status":false },{"pubDate":"22/09/2016", "position":"10", "status":false } ] };
+    var validFalse =  {"status":false};
+    var newUser = {"status":true, "user":{"id":41, "name":"Wiljac", "lastName":"Aular", "cedula":"19960100", "email":"waular@eluniversal.com", "phone":"04129350470"}, "answers":[{"pubDate":"13/09/2016", "position":"1", "status":true }, {"pubDate":"14/09/2016", "position":"2", "status":true },{"pubDate":"15/09/2016", "position":"3", "status":false },{"pubDate":"16/09/2016", "position":"4", "status":false }, {"pubDate":"17/09/2016", "position":"5", "status":false },{"pubDate":"18/09/2016", "position":"6", "status":false },{"pubDate":"19/09/2016", "position":"7", "status":false }, {"pubDate":"20/09/2016", "position":"8", "status":false },{"pubDate":"21/09/2016", "position":"9", "status":false },{"pubDate":"22/09/2016", "position":"10", "status":false } ] };
+    var final = {"answers":[{"pubDate":"13/09/2016", "position":"1", "answer": "Japan", "status":true }, {"pubDate":"14/09/2016", "position":"2", "status":true },{"pubDate":"15/09/2016", "position":"3", "status":false },{"pubDate":"16/09/2016", "position":"4", "status":false }, {"pubDate":"17/09/2016", "position":"5", "status":false },{"pubDate":"18/09/2016", "position":"6", "status":false },{"pubDate":"19/09/2016", "position":"7", "status":false }, {"pubDate":"20/09/2016", "position":"8", "status":false },{"pubDate":"21/09/2016", "position":"9", "status":false },{"pubDate":"22/09/2016", "position":"10", "status":false } ] };
+    
+    $httpBackend.whenGET(new RegExp('\\/validservice\\/[0-9]+')).respond(function(method, url, data) {
+      return [200, validFalse, {}];
+    });
+    $httpBackend.whenPOST('/register').respond(function(method, url, data) {
+      return [200, newUser, {}];
+    });
+    $httpBackend.whenPOST('/answers').respond(function(method, url, data) {
+      return [200, {'answers': {'a1': 'Japon', 'a2': '', 'a3': '', 'a4' : ''}}, {}];
+    });
+  })
 
- .controller('DemoCtrl', function($scope, $http, $timeout, $mdPanel) {
-    $scope.slide = true;
-    $scope.isLoading = false;
+  .controller("RegisterCtrl", function ($scope, $http) {
     $scope.showLogin = true;
-    $scope.showRegister = false;
-    $scope.states = [
-      "Amazonas",
-      "Anzoátegui",
-      "Apure",
-      "Aragua",
-      "Barinas",
-      "Bolívar",
-      "Carabobo",
-      "Cojedes",
-      "Distrito Capital",
-      "Delta Amacuro",
-      "Falcón",
-      "Guárico",
-      "Lara",
-      "Mérida",
-      "Miranda",
-      "Monagas",
-      "Nueva Esparta",
-      "Portuguesa",
-      "Sucre",
-      "Táchira",
-      "Trujillo",
-      "Vargas",
-      "Yaracuy",
-      "Zulia"
-    ];
-    $scope.dates = [
-      "14/10/2016",
-      "15/10/2016",
-      "16/10/2016",
-      "17/10/2016",
-      "18/10/2016",
-      "19/10/2016"
-    ];
-    $scope.answers = [];
-  $scope.hidebases = function() {
-    $scope.slide = false;
-  }
-  $scope.validate = function(){ // (1) Funcion para validar cedula del usuario
-      $scope.isLoading = true;
-      //se llama al servicio que responde false si no esta registrado y responde true mas los datos del usuario si esta registrado
-      $http.get('http://widget.eluniversal.com/ContestAdmin/services/questions/user/281/' + $scope.user.ci, {
-        headers : { 
-          'Content-Type': 'application/json;charset=utf-8;'
-        }}
-      )
-      .success(function (data) {
+    $scope.showRegister = false; //primera pantalla sin registro
+    $scope.showAnswers = false; //primera pantalla sin respuestas
+    $scope.validate = function(){
+      $http.get('/validservice/' + $scope.user.ci) //envio la cedula del usuario al servicio de validacion de usuario
+         .success(function (data) {
             console.log(data.status);
-            $scope.showLogin = false; //escondo el login
+            $scope.isLoading = true;
+            $scope.showLogin = false;
             if (!data.status){ //si es falso el usuario no esta registrado
-              $timeout(function() {
-                $scope.showRegister = true;
-              }, 500);
-           }else{ 
-              angular.forEach(data.user, function(value, key) {
-                console.log(value);
+              $scope.showRegister = true; // muestro el registro
+                $scope.isLoading = false;//escondo el login
+            }else{ // si es verdadero el usuario esta registrado
+               $scope.isLoading = false;
+              $scope.showAnswers = true;
+              console.log(data.answers);
+              $scope.answersResp = data.answers;
+            }
+          });
+        };
 
-
-              }, log);
-            // si es verdadero el usuario esta registrado
-            //se muestra el formulario de respuestas
-            //si el usuario tiene respuestas cargadas se muestran
-            //
-
-             // $scope.showAnswers = true;
-             // console.log(data.answers);
-             // $scope.answersResp = data.answers;
-          }
-      })
-     .finally(function () {
-        // Hide loading whether our call succeeded or failed.
-        $scope.isLoading = false;
-      });
-   };
-   $scope.register = function(){
-      $scope.isLoading = true;
+    $scope.registerf = function(){
       $scope.showRegister = false; //se esconde el registro
-      var data = {"name":$scope.user.name,
-                  "lastName":$scope.user.lastname,
-                  "cedula": $scope.user.ci,
-                  "email":$scope.user.mail,
-                  "phone":$scope.user.phone,
-                  "address": $scope.state
-               };
-      console.log(data); //a continuacion se llama al servicio que registra
-      $http.post('http://widget.eluniversal.com/ContestAdmin/services/questions/user/register/281/', data, {
-        headers : { 
-          'Content-Type': 'application/json;charset=utf-8;'
-        }}
-      ) //envio la dara completa del usuario al servicio y me devuelve los mismos datos mas el id
-        .success(function (data) {
-          console.log(data);
-          var userid = data.user.id;
-          console.log(userid);
-          // $scope.answers = data.answers;
-          $scope.showAnswers = true; 
-      })
-      .finally(function () {
-        // Hide loading whether our call succeeded or failed.
-        $scope.isLoading = false;
+      $scope.showAnswers = true; 
+      var data = $.param({ // guardo la data del usuario que ingresa en el formulario
+                  name: $scope.user.first_name,
+                  lastName: $scope.user.last_name,
+                  ci: $scope.user.ci,
+                  email: $scope.user.mail,
+                  phone: $scope.user.phone
+                });
+      console.log(data);
+      $http.post('/register', data).then(function(response){ //envio los datos del usuario al servicio que lo registra y me devuelve el id y las respuestas vacias 
+        console.log(response);
+        $scope.answersResp = response.data.answers;
       });
-   };
-
+    }
     $scope.sendAnswers = function(){
-      //lamada al servicio que guardara la participacion
-
-      $scope.answers.push($scope.user.answer);
-      console.log($scope.answers);
-    };
-})
-
+      $http.post('/answers', $scope.answersResp).then(function(response){ //envio los datos del usuario al servicio que lo registra y me devuelve el id y las respuestas vacias 
+        console.log(response);
+      });
+    }
+  })
 
 
- .config(function($mdThemingProvider) {
-  // Configure a dark theme with primary foreground yellow
-  $mdThemingProvider.theme('default')
-  .primaryPalette('blue')
-});
-
+;
