@@ -1,4 +1,5 @@
 {
+	"status": true,
 	"user":41,
 	"contestId":221,
 	"answers":[
@@ -16,3 +17,31 @@
 		}
 	]
 }
+
+status
+:
+true
+user
+:
+Object
+address
+:
+"Barinas"
+cedula
+:
+"123578"
+email
+:
+"as@as.com"
+id
+:
+1435
+lastName
+:
+"probando"
+name
+:
+"prueba"
+phone
+:
+"34434"

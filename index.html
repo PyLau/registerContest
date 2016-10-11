@@ -6,6 +6,8 @@
   <!-- Angular Material style sheet -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+  <!-- <link rel="stylesheet" href="http://static.eluniversal.com/css/eu5/angular-material.min.css"> -->
+  <!-- <link rel="stylesheet" href="http://cdn.eluniversal.com/css/eu5/docs.css"> -->
   <link rel="stylesheet" href="https://material.angularjs.org/1.1.1/docs.css">
   <link rel="stylesheet" href="css/styles2.css">
 </head>
@@ -31,7 +33,11 @@
 Persona Responsable: Anabel Amaral. Teléfono: 0501-5052020. Email: vagregados@eluniversal.
           </p>
           <md-dialog-actions><!-- ngIf: dialog.$type === 'confirm' || dialog.$type === 'prompt' -->
-            <button class="md-primary md-confirm-button md-button md-default-theme md-ink-ripple md-autofocus" type="button" ng-transclude="" ng-click="hidebases()" ><span class="ng-binding ng-scope">Acepto</span><div class="md-ripple-container"></div></button></md-dialog-actions>
+            <button class="md-primary md-confirm-button md-button md-default-theme md-ink-ripple md-autofocus" type="button" ng-click="hidebases()">
+              <span class="ng-binding ng-scope">Acepto</span>
+              <div class="md-ripple-container"></div>
+            </button>
+          </md-dialog-actions>
         </md-content>
     <div class="loading" ng-show="isLoading"></div>
     <md-progress-circular ng-show="isLoading" md-mode="indeterminate"></md-progress-circular>
@@ -99,9 +105,10 @@ Persona Responsable: Anabel Amaral. Teléfono: 0501-5052020. Email: vagregados@e
           <md-button ng-disabled="registerForm.$invalid" ng-click="register()" class="md-raised md-primary">Listo</md-button>
         </form>
         <form ng-show="showAnswers" method="post" name="answersForm" novalidate>
-          <md-input-container ng-repeat="answer in answers" class="md-block" flex-gt-sm="">
-            <label for="{{answer.pubDate}}">{{answer.pubDate }}</label>
-            <input name="answer" type="text" ng-model="user.answer" ng-required="true"/>
+          <h1 class="md-title">Ingresa tus respuestas</h1>
+          <md-input-container ng-repeat="date in dates" class="md-block" flex-gt-sm="">
+            <label for="{{date}}">{{date}}</label>
+            <input name="answer" type="text" ng-model="user.answer"/>
           </md-input-container>
           <md-button ng-disabled="answersForm.$invalid" ng-click="sendAnswers()" class="md-raised md-primary">Listo</md-button>					
         </form>
@@ -120,6 +127,15 @@ Persona Responsable: Anabel Amaral. Teléfono: 0501-5052020. Email: vagregados@e
   <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-mocks.js"></script> -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-mocks.js"></script> -->
+  <!-- Librerias static-->
+<!--   <script src="http://static.eluniversal.com/js/eu5/angular.min.js"></script>
+  <script src="http://static.eluniversal.com/js/eu5/angular-animate.min.js"></script>
+  <script src="http://static.eluniversal.com/js/eu5/angular-route.min.js"></script>
+  <script src="http://static.eluniversal.com/js/eu5/angular-aria.min.js"></script>
+  <script src="http://static.eluniversal.com/js/eu5/angular-messages.min.js"></script>
+  <script src="http://static.eluniversal.com/js/eu5/svg-assets-cache.js"></script>
+  <script src="http://static.eluniversal.com/js/eu5/angular-material.min.js"></script> -->
   <!-- Your application js -->
   <script src="js/script4.js"></script>
 </body>
