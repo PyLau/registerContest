@@ -10,37 +10,41 @@
  // })
 
  .controller('DemoCtrl', function($scope, $http, $timeout, $mdPanel) {
-    var slide = true;
+    $scope.slide = true;
     $scope.isLoading = false;
+    $scope.showLogin = true;
+    $scope.showRegister = false;
     $scope.states = [
-    "Amazonas",
-    "Anzoátegui",
-    "Apure",
-    "Aragua",
-    "Barinas",
-    "Bolívar",
-    "Carabobo",
-    "Cojedes",
-    "Distrito Capital",
-    "Delta Amacuro",
-    "Falcón",
-    "Guárico",
-    "Lara",
-    "Mérida",
-    "Miranda",
-    "Monagas",
-    "Nueva Esparta",
-    "Portuguesa",
-    "Sucre",
-    "Táchira",
-    "Trujillo",
-    "Vargas",
-    "Yaracuy",
-    "Zulia"
+      "Amazonas",
+      "Anzoátegui",
+      "Apure",
+      "Aragua",
+      "Barinas",
+      "Bolívar",
+      "Carabobo",
+      "Cojedes",
+      "Distrito Capital",
+      "Delta Amacuro",
+      "Falcón",
+      "Guárico",
+      "Lara",
+      "Mérida",
+      "Miranda",
+      "Monagas",
+      "Nueva Esparta",
+      "Portuguesa",
+      "Sucre",
+      "Táchira",
+      "Trujillo",
+      "Vargas",
+      "Yaracuy",
+      "Zulia"
     ];
 
-  $scope.showLogin = true;
-  $scope.showRegister = false;
+
+  $scope.hidebases = function() {
+    $scope.slide = false;
+  }
   $scope.validate = function(){ // (1) Funcion para validar cedula del usuario
       $scope.isLoading = true;
       //se llama al servicio que responde false si no esta registrado y responde true mas los datos del usuario si esta registrado

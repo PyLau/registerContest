@@ -11,8 +11,8 @@
 </head>
 <body>
   <div ng-controller="DemoCtrl" class="md-inline-form inputdemoBasicUsage" ng-app="MyApp">
-    <div class="animate-slide" ng-hide="slide"></div>
-        <md-content class="bases" flex="" layout-padding="">
+        <div class="animate-slide" ng-show="slide"></div>
+        <md-content class="bases" ng-show="slide" flex="" layout-padding="">
           <h3>BASES</h3>
           <p>Dirigido a mayores de edad.</p>
           <p>Válida a nivel a nacional (excepto estados puerto libre) desde el 17/10/2016 hasta el 27/10/2016.</p>
@@ -26,16 +26,18 @@
           <p>El sábado 29/10/2016 se publicarán los resultados finales en la web y se adjudicarán los premios con base en el puntaje acumulado, son diez (10) ganadores que serán contactados inmediatamente vía telefónica y por correo electrónico.</p>
           <h3>PREMIOS</h3>
           <p>
-    Veinticuatro (24) pelotas autografiadas por grandes ligas y peloteros de la LVBP temporada 2015-2016,  distribuidas en 10 ganadores.
-Fecha y lugar de entrega de premios: viernes 04/11/2016 a las 10:00AM en la sede del Diario El Universal C.A, en la Avenida Urdaneta, Esquina de Ánimas, Edificio El Universal, piso 7, La Candelaria. Caracas.
+          Veinticuatro (24) pelotas autografiadas por grandes ligas y peloteros de la LVBP temporada 2015-2016,  distribuidas en 10 ganadores.
+          Fecha y lugar de entrega de premios: viernes 04/11/2016 a las 10:00AM en la sede del Diario El Universal C.A, en la Avenida Urdaneta, Esquina de Ánimas, Edificio El Universal, piso 7, La Candelaria. Caracas.
 Persona Responsable: Anabel Amaral. Teléfono: 0501-5052020. Email: vagregados@eluniversal.
           </p>
-
+          <md-dialog-actions><!-- ngIf: dialog.$type === 'confirm' || dialog.$type === 'prompt' -->
+            <button class="md-primary md-confirm-button md-button md-default-theme md-ink-ripple md-autofocus" type="button" ng-transclude="" ng-click="hidebases()" ><span class="ng-binding ng-scope">Acepto</span><div class="md-ripple-container"></div></button></md-dialog-actions>
         </md-content>
-      
-  
     <div class="loading" ng-show="isLoading"></div>
     <md-progress-circular ng-show="isLoading" md-mode="indeterminate"></md-progress-circular>
+    <div  layout="row" layout-align="center center">
+      <img class="banner" src="images/banner.jpg" alt="">
+    </div>
     <div class="container md-whiteframe-5dp">	
       <md-content layout-padding="">
         <div class="header-text">
