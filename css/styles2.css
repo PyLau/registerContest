@@ -2,7 +2,6 @@
     max-width: 600px;
     max-height: 800px;
     margin: 0 auto;
-    margin-top: 10px;
 }
 
 md-content {
@@ -55,30 +54,102 @@ md-input-container:not(.md-input-invalid).md-input-focused label {
 .md-button.md-primary.md-raised, .md-button.md-primary.md-raised:not([disabled]):hover {
     background-color: red;
 }*/
-.demo-md-panel {
-  min-height: 500px;
-}
+/*body{
+  background-color:#FFF;
+  height:100%;
+  width:100%;
+  margin:0;
+  color:#FFF;
+  font-size:3em;
+  line-height:100px;
+  text-align:center;
+  overflow:hidden;
+}*/
 
-.demo-dialog-example {
-  background: white;
-  border-radius: 4px;
-  box-shadow: 0 7px 8px -4px rgba(0, 0, 0, 0.2),
-      0 13px 19px 2px rgba(0, 0, 0, 0.14),
-      0 5px 24px 4px rgba(0, 0, 0, 0.12);
-  width: 800px;
-}
+#slide{
+  position:absolute;
+  width:100%;
+  height:100px;
+  top:90%;
+  background: red;
+}  
 
-.demo-dialog-content {
-  padding: 0 15px;
+.animate-slide {
+  background: rgba(33,33,33,1.0);
+  position:absolute;
   width: 100%;
+  height:100%;
+  top: 0;
+  -webkit-transform: translate3d(0,0,0); /* Chrome, Safari, Opera */
+  transform: translate3d(0,0,0,);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  perspective: 1000;
+  z-index: 1000;
+  opacity: .48;
+  -webkit-transition: opacity 0.3s cubic-bezier(0, 0, 0.2, 1);
+  transition: opacity 0.3s cubic-bezier(0, 0, 0.2, 1);
 }
 
-.demo-dialog-button {
-  width: 100%;
+.animate-slide.ng-hide-add,
+.animate-slide.ng-hide-remove {
+  display:block!important;
 }
 
+.animate-slide.ng-hide-remove.ng-hide-remove-active {
+  -webkit-animation:0.5s slide-up;
+  animation:0.5s slide-up;
+}
 
-/*
-Copyright 2016 Google Inc. All Rights Reserved. 
-Use of this source code is governed by an MIT-style license that can be foundin the LICENSE file at http://material.angularjs.org/HEAD/license.
-*/
+.animate-slide.ng-hide-add.ng-hide-add-active {
+  -webkit-animation:0.5s slide-down;
+  animation:0.5s slide-down;
+}
+
+.animate-slide.ng-hide {
+  top:90%;
+  display:block!important;
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes slide-up
+{
+  0%   {top:90%;}
+  100%  {top:0;}
+}
+
+/* Standard syntax */
+@keyframes slide-up
+{
+  0%   {top:90%;}
+  100%  {top:0;}
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes slide-down
+{
+  0%  {top:0;}
+  100%   {top:90%;}
+}
+
+/* Standard syntax */
+@keyframes slide-down
+{
+  0%  {top:0;}
+  100%   {top:90%;}
+}
+
+.bases{
+    width: 50%;
+    z-index: 1000;
+    left: 25%;
+    position: absolute;
+    height: 100%;
+}
+
+.bases p{
+    margin: 0;
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+}
